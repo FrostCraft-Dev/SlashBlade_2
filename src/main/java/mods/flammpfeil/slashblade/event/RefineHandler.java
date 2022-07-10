@@ -5,9 +5,11 @@ import mods.flammpfeil.slashblade.item.ItemSlashBlade;
 import mods.flammpfeil.slashblade.util.AdvancementHelper;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
+import net.minecraft.core.Registry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
@@ -16,6 +18,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.player.AnvilRepairEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class RefineHandler {
     private static final class SingletonHolder {
@@ -88,9 +91,9 @@ public class RefineHandler {
 
         if(!isRepairable) return;
 
-        Tag<Item> souls = ItemTags.getAllTags().getTag(new ResourceLocation("slashblade","proudsouls"));
+        Tag<Item> souls = (Tag<Item>) ForgeRegistries.ITEMS.tags().getTag(new TagKey(Registry.ITEM_REGISTRY, new ResourceLocation("slashblade","proudsouls")));
 
-        if(!souls.contains(material.getItem())) return;
+        if(!souls.getValues().contains(material.getItem())) return;
 
         AdvancementHelper.grantCriterion((ServerPlayer) event.getPlayer(), REFINE);
     }

@@ -65,6 +65,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.server.ServerLifecycleHooks;
 
 public class ItemSlashBlade extends SwordItem {
@@ -537,7 +538,8 @@ public class ItemSlashBlade extends SwordItem {
     @Override
     public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
 
-        if(ItemTags.STONE_TOOL_MATERIALS.contains(repair.getItem())){
+
+        if(ForgeRegistries.ITEMS.tags().getTag(ItemTags.STONE_TOOL_MATERIALS).contains(repair.getItem())){
             return true;
         }
 

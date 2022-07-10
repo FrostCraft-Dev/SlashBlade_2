@@ -32,6 +32,7 @@ import mods.flammpfeil.slashblade.network.NetworkManager;
 import mods.flammpfeil.slashblade.util.TargetSelector;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -221,8 +222,8 @@ public class SlashBlade
             registry.register(
                     new ItemSlashBlade(
                             new ItemTierSlashBlade(() -> {
-                                Tag<Item> tags = ItemTags.getAllTags().getTag(new ResourceLocation("slashblade","proudsouls"));
-                                return Ingredient.of(tags);
+                                Tag<Item> tags = (Tag<Item>) ForgeRegistries.ITEMS.tags().getTag(new TagKey<>(Registry.ITEM_REGISTRY, new ResourceLocation("slashblade","proudsouls")));
+                                return Ingredient.of(tags.getValues().toArray(new Item[0]));
                                 //Ingredient.fromItems(SBItems.proudsoul)
                             }),
                             1,
